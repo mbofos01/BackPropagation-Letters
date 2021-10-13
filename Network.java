@@ -394,6 +394,7 @@ public class Network {
 			filename = args[0];
 		ArrayList<String> list = Tools.getParameters(filename);
 		handleParameters(list);
+
 		int test_size = Tools.findLines(test);
 
 		initNetwork();
@@ -409,11 +410,7 @@ public class Network {
 				ArrayList<Double> tpj = new ArrayList<>();
 				for (int j = 0; j < INPUT_LAYER - 1; j++)
 					first[j].setInput(INPUTS.get(j)[i]);
-				for (Neuron a : first) {
-					System.out.print(a.input + "  ");
-				}
-				System.out.println();
-				System.exit(0);
+
 				step(second, input);
 				if (inUse2)
 					step(third, inside);
@@ -424,10 +421,21 @@ public class Network {
 				for (int k = 0; k < OUTPUT_LAYER; k++) {
 					tpj.add(OUTPUTS.get(k)[i]);
 					opj.add(fourth[k].getInput());
-					TRAIN_ERROR += Tools.error(tpj, opj);
+
 				}
+				TRAIN_ERROR += Tools.error(tpj, opj);
+
 				if (Tools.correct(tpj, opj))
 					TRAIN_SUCCESS++;
+				// System.exit(1);
+				double[] temp_out = new double[fourth.length];
+				for (int a = 0; a < fourth.length; a++)
+					temp_out[a] = fourth[a].getInput();
+				double[] output_maxed = Tools.findPeak(temp_out);
+
+				char real_letter = Tools.createLetterFromArray(output_maxed);
+				// System.out.println(real_letter);
+				// System.exit(0);
 			}
 			TRAIN_SUCCESS = TRAIN_SUCCESS / (train_size * 1.0);
 			double TEST_ERROR = 0.0, TEST_SUCCESS = 0.0;
@@ -444,8 +452,9 @@ public class Network {
 				for (int k = 0; k < OUTPUT_LAYER; k++) {
 					tpj.add((double) TEST_OUTPUTS.get(k)[i]);
 					opj.add(fourth[k].getInput());
-					TEST_ERROR += Tools.error(tpj, opj);
+
 				}
+				TEST_ERROR += Tools.error(tpj, opj);
 				if (Tools.correct(tpj, opj))
 					TEST_SUCCESS++;
 
@@ -460,18 +469,30 @@ public class Network {
 		Tools.feedFile("errors.txt", error_txt);
 		Tools.feedFile("successrate.txt", success_txt);
 
-		double[] outs = new double[test_size];
+		ArrayList<double[]> outs = new ArrayList<>();
 		for (int i = 0; i < test_size; i++) {
+			double[] real_temp_out = new double[OUTPUT_LAYER];
+			// outs.add();
 			for (int j = 0; j < INPUT_LAYER - 1; j++)
 				first[j].setInput(TEST_INPUTS.get(j)[i]);
 			step(second, input);
 			if (inUse2)
 				step(third, inside);
 			step(fourth, output);
-			outs[i] = Tools.customRound(fourth[0].getInput());
+			for (int g = 0; g < OUTPUT_LAYER; g++)
+				real_temp_out[g] = fourth[g].getInput();
+
+			double[] output_maxed = Tools.findPeak(real_temp_out);
+
+			char real_letter = Tools.createLetterFromArray(output_maxed);
+			double[] exp_out = new double[OUTPUT_LAYER];
+			for (int ia = 0; ia < 26; ia++) {
+				exp_out[ia] = TEST_OUTPUTS.get(ia)[i];
+			}
+			System.out.println("expected: " + Tools.createLetterFromArray(exp_out) + " got: " + real_letter);
 		}
 
-		printResults(TEST_OUTPUTS, TEST_INPUTS, outs, test_size);
+		// printResults(TEST_OUTPUTS, TEST_INPUTS, outs, test_size);
 
 		Tools.runPython("error_plot.py", "errors.txt");
 		Tools.runPython("success_plot.py", "successrate.txt");

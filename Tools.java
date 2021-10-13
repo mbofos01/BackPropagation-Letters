@@ -86,9 +86,10 @@ public class Tools {
 	 */
 	public static double error(ArrayList<Double> tpj, ArrayList<Double> opj) {
 		double sum = 0;
-		for (int i = 0; i < tpj.size(); i++) {
+
+		for (int i = 0; i < tpj.size(); i++)
 			sum += (tpj.get(i) - opj.get(i)) * (tpj.get(i) - opj.get(i));
-		}
+
 		return 0.5 * sum;
 
 	}
@@ -146,10 +147,11 @@ public class Tools {
 				// System.out.println("Tokens: " + tok.countTokens());
 				String letter = tok.nextToken();
 
+				// System.out.println(letter);
 				double[] outs = createExpectedOutputArray(letter.charAt(0));
 
 				for (int i = 0; i < out; i++)
-					outputs.get(i)[cnt] = outs[i] * 1.0;
+					outputs.get(i)[cnt] = outs[i];
 
 				for (int i = 0; i < in; i++)
 					inputs.get(i)[cnt] = Double.parseDouble(tok.nextToken());
@@ -258,10 +260,24 @@ public class Tools {
 		return letter;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(createLetterFromArray(createExpectedOutputArray('D')));
+	public static double[] findPeak(double[] output) {
+		double[] maxer = new double[output.length];
+		int max_place = 0;
+		double max_value = 0;
+		for (int i = 0; i < output.length; i++) {
+			if (output[i] >= max_value) {
+				max_place = i;
+				max_value = output[i];
+			}
+		}
+		maxer[max_place] = 1;
+		return maxer;
 	}
 
+	/*
+	 * public static void main(String[] args) {
+	 * System.out.println(createLetterFromArray(createExpectedOutputArray('D'))); }
+	 */
 	/*
 	 * public static void main(String[] args) { for (char a = 'A'; a <= 'Z'; a++)
 	 * createExpectedOutputArray(a); }
@@ -275,16 +291,23 @@ public class Tools {
 	 * @return True if the vectors are equal, otherwise false
 	 */
 	public static boolean correct(ArrayList<Double> tpj, ArrayList<Double> opj) {
-		if (tpj.size() != opj.size())
+		if (tpj.size() != opj.size()) {
 			System.out.println("SOMETHINGS WRONG");
-		int corrects = 0;
-		for (int i = 0; i < tpj.size(); i++) {
-			if (tpj.get(i) == 0 && opj.get(i) <= 0.1)
-				corrects++;
-			else if (tpj.get(i) == 1 && opj.get(i) >= 0.9)
-				corrects++;
+			System.exit(1);
 		}
-		return corrects == tpj.size();
+
+		double[] real = new double[opj.size()];
+		double[] target = new double[tpj.size()];
+		for (int i = 0; i < opj.size(); i++) {
+			real[i] = opj.get(i);
+			target[i] = tpj.get(i);
+		}
+		real = findPeak(real);
+		for (int i = 0; i < tpj.size(); i++)
+			if (real[i] != target[i])
+				return false;
+
+		return true;
 	}
 
 }
