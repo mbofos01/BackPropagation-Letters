@@ -343,9 +343,12 @@ public class Network {
 		for (int i = 0; i < OUTPUT_LAYER; i++)
 			TEST_OUTPUTS.add(new double[test_size]);
 
+		printArguments();
+
 		Tools.fillData(train, INPUTS, OUTPUTS);
 		Tools.fillData(test, TEST_INPUTS, TEST_OUTPUTS);
 		// ====================================================//
+		System.exit(0);
 		INPUT_LAYER++;
 		first = new Neuron[INPUT_LAYER];
 		if (SECOND_LAYER > 0) {
@@ -367,15 +370,15 @@ public class Network {
 	 */
 	public static void printArguments() {
 		System.out.println("            +---------------------------+");
-		System.out.println("            |  Input layer:  " + (INPUT_LAYER - 1) + "          |");
+		System.out.println("            |  Input layer:  " + (INPUT_LAYER - 1) + "         |");
 		System.out.println("            |  Hidden layer: " + (SECOND_LAYER - 1) + "          |");
 		if (THIRD_LAYER != 0)
 			System.out.println("            |  2nd Hidden layer: " + (THIRD_LAYER - 1) + "      |");
-		System.out.println("            |  Output layer: " + OUTPUT_LAYER + "          |");
+		System.out.println("            |  Output layer: " + OUTPUT_LAYER + "         |");
 		System.out.println("            |  Max epochs: " + EPOCH_LIMIT + "         |");
 		System.out.println("            |  Learning rate: " + R + "       |");
 		System.out.println("            |  Momenmtum: " + M + "           |");
-		System.out.println("            |  Train file: " + train + " |");
+		System.out.println("            |  Train file: " + train + "    |");
 		System.out.println("            |  Test  file: " + test + "     |");
 		System.out.println("            +---------------------------+");
 	}
