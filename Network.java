@@ -347,8 +347,9 @@ public class Network {
 
 		Tools.fillData(train, INPUTS, OUTPUTS);
 		Tools.fillData(test, TEST_INPUTS, TEST_OUTPUTS);
+
 		// ====================================================//
-		System.exit(0);
+
 		INPUT_LAYER++;
 		first = new Neuron[INPUT_LAYER];
 		if (SECOND_LAYER > 0) {
@@ -362,7 +363,6 @@ public class Network {
 			inUse2 = true;
 		}
 		fourth = new Neuron[OUTPUT_LAYER];
-		printArguments();
 	}
 
 	/**
@@ -393,9 +393,9 @@ public class Network {
 		if (args.length >= 1)
 			filename = args[0];
 		ArrayList<String> list = Tools.getParameters(filename);
-
 		handleParameters(list);
 		int test_size = Tools.findLines(test);
+
 		initNetwork();
 		connectAll();
 		int epochs = 0;
@@ -409,6 +409,11 @@ public class Network {
 				ArrayList<Double> tpj = new ArrayList<>();
 				for (int j = 0; j < INPUT_LAYER - 1; j++)
 					first[j].setInput(INPUTS.get(j)[i]);
+				for (Neuron a : first) {
+					System.out.print(a.input + "  ");
+				}
+				System.out.println();
+				System.exit(0);
 				step(second, input);
 				if (inUse2)
 					step(third, inside);
