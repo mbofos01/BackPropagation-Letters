@@ -86,7 +86,6 @@ public class Tools {
 	 */
 	public static double error(ArrayList<Double> tpj, ArrayList<Double> opj) {
 		double sum = 0;
-
 		for (int i = 0; i < tpj.size(); i++)
 			sum += (tpj.get(i) - opj.get(i)) * (tpj.get(i) - opj.get(i));
 
@@ -278,10 +277,12 @@ public class Tools {
 	 * public static void main(String[] args) {
 	 * System.out.println(createLetterFromArray(createExpectedOutputArray('D'))); }
 	 */
-	/*
-	 * public static void main(String[] args) { for (char a = 'A'; a <= 'Z'; a++)
-	 * createExpectedOutputArray(a); }
-	 */
+
+	public static void main(String[] args) {
+		for (char a = 'A'; a <= 'Z'; a++)
+			createExpectedOutputArray(a);
+	}
+
 	/**
 	 * This function is used to check if two arraylist are the same. NOTE: because
 	 * we use double numbers we use math.round to check their equality.
