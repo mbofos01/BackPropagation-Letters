@@ -25,7 +25,7 @@ public class Connection {
 	/**
 	 * All past weights
 	 */
-	public ArrayList<Double> weightHistory = new ArrayList<>();
+	public double weightHistory;
 
 	/**
 	 * Default constructor.
@@ -35,11 +35,10 @@ public class Connection {
 	 * @param weight  Weight between neuron1 and neuron2
 	 */
 	public Connection(Neuron neuron1, Neuron neuron2, double weight) {
-		weightHistory.add(0.0);
+		weightHistory = 0;
 		this.neuron1 = neuron1;
 		this.neuron2 = neuron2;
 		this.weight = weight;
-		weightHistory.add(weight);
 	}
 
 	/**
@@ -76,9 +75,9 @@ public class Connection {
 	 * @param weight Double value new weight
 	 */
 	public void changeWeight(double weight) {
-
+		weightHistory = this.weight;
 		this.weight = weight;
-		weightHistory.add(weight);
+
 	}
 
 	/**
@@ -94,9 +93,16 @@ public class Connection {
 	 * @return Double value past weight
 	 */
 	public double getLastWeight() {
-		int last = weightHistory.size();
-		Object[] ar = weightHistory.toArray();
-		return (double) ar[last - 2];
+
+		return weightHistory;
+	}
+
+	public static void main(String[] args) {
+		Connection con = new Connection(new Neuron(), new Neuron(), 2);
+		con.details();
+		System.out.println(con.getLastWeight());
+		con.changeWeight(5);
+		System.out.println(con.getLastWeight());
 	}
 
 }

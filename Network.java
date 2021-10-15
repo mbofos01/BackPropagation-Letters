@@ -474,8 +474,8 @@ public class Network {
 			epochs++;
 			TEST_SUCCESS = TEST_SUCCESS / (test_size * 1.0);
 			TEST_ERROR = TEST_ERROR / test_size;
-			System.out.println("Error: " +epochs + " " + TRAIN_ERROR + " " + TEST_ERROR );
-			System.out.println("Success: " +epochs + " " + (TRAIN_SUCCESS * 100) + " " + (TEST_SUCCESS * 100) );
+			System.out.println("Error: " + epochs + " " + TRAIN_ERROR + " " + TEST_ERROR);
+			System.out.println("Success: " + epochs + " " + (TRAIN_SUCCESS * 100) + " " + (TEST_SUCCESS * 100));
 			error_txt.add(new String(epochs + " " + TRAIN_ERROR + " " + TEST_ERROR));
 			success_txt.add(new String(epochs + " " + (TRAIN_SUCCESS * 100) + " " + (TEST_SUCCESS * 100) + ""));
 
@@ -483,22 +483,32 @@ public class Network {
 		Tools.feedFile("errors.txt", error_txt);
 		Tools.feedFile("successrate.txt", success_txt);
 
-		/*
-		 * ArrayList<double[]> outs = new ArrayList<>(); for (int i = 0; i < test_size;
-		 * i++) { double[] real_temp_out = new double[OUTPUT_LAYER]; // outs.add(); for
-		 * (int j = 0; j < INPUT_LAYER - 1; j++)
-		 * first[j].setInput(TEST_INPUTS.get(j)[i]); step(second, input); if (inUse2)
-		 * step(third, inside); step(fourth, output); for (int g = 0; g < OUTPUT_LAYER;
-		 * g++) real_temp_out[g] = fourth[g].getInput();
-		 * 
-		 * double[] output_maxed = Tools.findPeak(real_temp_out);
-		 * 
-		 * char real_letter = Tools.createLetterFromArray(output_maxed); double[]
-		 * exp_out = new double[OUTPUT_LAYER]; for (int ia = 0; ia < 26; ia++) {
-		 * exp_out[ia] = TEST_OUTPUTS.get(ia)[i]; } System.out.println("expected: " +
-		 * Tools.createLetterFromArray(exp_out) + " got: " + real_letter); }
-		 */
+		ArrayList<String> outs = new ArrayList<>();
+		for (int i = 0; i < test_size; i++) {
+			double[] real_temp_out = new double[OUTPUT_LAYER]; //
+
+			for (int j = 0; j < INPUT_LAYER - 1; j++)
+				first[j].setInput(TEST_INPUTS.get(j)[i]);
+			step(second, input);
+			if (inUse2)
+				step(third, inside);
+			step(fourth, output);
+			for (int g = 0; g < OUTPUT_LAYER; g++)
+				real_temp_out[g] = fourth[g].getInput();
+
+			double[] output_maxed = Tools.findPeak(real_temp_out);
+
+			char real_letter = Tools.createLetterFromArray(output_maxed);
+			double[] exp_out = new double[OUTPUT_LAYER];
+			for (int ia = 0; ia < 26; ia++) {
+				exp_out[ia] = TEST_OUTPUTS.get(ia)[i];
+			}
+			outs.add("expected: " + Tools.createLetterFromArray(exp_out) + " got: " + real_letter);
+		}
+
 		// printResults(TEST_OUTPUTS, TEST_INPUTS, outs, test_size);
+
+		Tools.feedFile("lastRun.txt", outs);
 
 		Tools.runPython("error_plot.py", "errors.txt");
 		Tools.runPython("success_plot.py", "successrate.txt");
