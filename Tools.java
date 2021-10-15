@@ -105,14 +105,15 @@ public class Tools {
 			File myObj = new File(filename);
 			Scanner myReader = new Scanner(myObj);
 			int cnt = 0;
-			while (myReader.hasNextLine()) {
+			while (list.size() < findLines(filename) && myReader.hasNextLine()) {
 				cnt++;
 				String data = myReader.next();
-				// System.out.println(data);
 				if (cnt == 2) {
 					list.add(data);
 					cnt = 0;
 				}
+
+				System.out.println(data);
 
 			}
 			myReader.close();
@@ -139,14 +140,9 @@ public class Tools {
 			int cnt = 0;
 			int in = inputs.size(), out = outputs.size();
 			while (myReader.hasNextLine()) {
-				/// WE ARE HERE READ STRING BREAK IT DOWN
 				String line = myReader.nextLine();
-				// System.out.println(line);
 				StringTokenizer tok = new StringTokenizer(line);
-				// System.out.println("Tokens: " + tok.countTokens());
 				String letter = tok.nextToken();
-
-				// System.out.println(letter);
 				double[] outs = createExpectedOutputArray(letter.charAt(0));
 
 				for (int i = 0; i < out; i++)
