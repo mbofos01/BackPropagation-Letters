@@ -390,6 +390,7 @@ public class Network {
 		String filename = "parameters.txt";
 		if (args.length >= 1)
 			filename = args[0];
+		dataCleaner.runMe("normalized.txt");
 		ArrayList<String> list = Tools.getParameters(filename);
 		handleParameters(list);
 
@@ -404,6 +405,7 @@ public class Network {
 		ArrayList<String> success_txt = new ArrayList<>();
 		double start_time = System.currentTimeMillis();
 		do {
+			dataCleaner.runMe("normalized.txt");
 			double TRAIN_ERROR = 0.0, TRAIN_SUCCESS = 0.0;
 			System.out.println("Epoch: " + epochs);
 			System.out.println("Starting training " + (System.currentTimeMillis() - start_time) / 1000);
@@ -460,8 +462,8 @@ public class Network {
 			epochs++;
 			TEST_SUCCESS = TEST_SUCCESS / (test_size * 1.0);
 			TEST_ERROR = TEST_ERROR / test_size;
-			System.out.println("Error: " + epochs + " " + TRAIN_ERROR + " " + TEST_ERROR);
-			System.out.println("Success: " + epochs + " " + (TRAIN_SUCCESS * 100) + " " + (TEST_SUCCESS * 100));
+			System.out.println("Error: " + " " + TRAIN_ERROR + " " + TEST_ERROR);
+			System.out.println("Success: " + " " + (TRAIN_SUCCESS * 100) + " " + (TEST_SUCCESS * 100));
 			error_txt.add(new String(epochs + " " + TRAIN_ERROR + " " + TEST_ERROR));
 			success_txt.add(new String(epochs + " " + (TRAIN_SUCCESS * 100) + " " + (TEST_SUCCESS * 100) + ""));
 
