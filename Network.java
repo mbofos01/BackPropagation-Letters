@@ -425,26 +425,12 @@ public class Network {
 					opj.add(fourth[k].getInput());
 
 				}
-				/*
-				 * System.out.println("Target: "); for (int v = 0; v < tpj.size(); v++) {
-				 * System.out.print(tpj.get(v)); } System.out.println("\nReal: "); for (int v =
-				 * 0; v < opj.size(); v++) { System.out.print(opj.get(v)); }
-				 */
+
 				TRAIN_ERROR += Tools.error(tpj, opj);
 
 				if (Tools.correct(tpj, opj))
 					TRAIN_SUCCESS++;
-				// System.out.println("sizes: " + opj.size());
-				// System.exit(1);
-				double[] temp_out = new double[fourth.length];
-				for (int a = 0; a < fourth.length; a++)
-					temp_out[a] = fourth[a].getInput();
-				double[] output_maxed = Tools.findPeak(temp_out);
 
-				char real_letter = Tools.createLetterFromArray(output_maxed);
-				// System.out.println(real_letter);
-				// System.exit(0);
-				// System.out.println((System.currentTimeMillis() - start_time) / 1000);
 			}
 
 			TRAIN_SUCCESS = TRAIN_SUCCESS / (train_size * 1.0);
@@ -485,7 +471,7 @@ public class Network {
 
 		ArrayList<String> outs = new ArrayList<>();
 		for (int i = 0; i < test_size; i++) {
-			double[] real_temp_out = new double[OUTPUT_LAYER]; //
+			double[] real_temp_out = new double[OUTPUT_LAYER];
 
 			for (int j = 0; j < INPUT_LAYER - 1; j++)
 				first[j].setInput(TEST_INPUTS.get(j)[i]);
@@ -504,34 +490,14 @@ public class Network {
 				exp_out[ia] = TEST_OUTPUTS.get(ia)[i];
 			}
 			outs.add("expected: " + Tools.createLetterFromArray(exp_out) + " got: " + real_letter);
-		}
 
-		// printResults(TEST_OUTPUTS, TEST_INPUTS, outs, test_size);
+		}
 
 		Tools.feedFile("lastRun.txt", outs);
 
 		Tools.runPython("error_plot.py", "errors.txt");
 		Tools.runPython("success_plot.py", "successrate.txt");
 
-	}
-
-	/**
-	 * This function prints the results of the final testing run.
-	 * 
-	 * @param out       ArrayList<double[]> Target outputs
-	 * @param in        ArrayList<double[]> Testing inputs
-	 * @param r         Double array real outputs
-	 * @param test_size The size of the testing data
-	 */
-	private static void printResults(ArrayList<double[]> out, ArrayList<double[]> in, double[] r, int test_size) {
-		System.out.println("+---------------------------------------------------+");
-		System.out.println("|  INPUT 1   |   INPUT 2   |   TARGET   |   REAL    |");
-		System.out.println("+------------+-------------+------------+-----------+");
-		for (int i = 0; i < 4; i++)
-			System.out.println("|    " + in.get(0)[i] + "     |     " + in.get(1)[i] + "     |" + "    " + out.get(0)[i]
-					+ "     |" + "    " + r[i] + "    |");
-
-		System.out.println("+---------------------------------------------------+");
 	}
 
 }
