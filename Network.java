@@ -405,7 +405,6 @@ public class Network {
 		ArrayList<String> success_txt = new ArrayList<>();
 		double start_time = System.currentTimeMillis();
 		do {
-			dataCleaner.runMe("normalized.txt");
 			double TRAIN_ERROR = 0.0, TRAIN_SUCCESS = 0.0;
 			System.out.println("Epoch: " + epochs);
 			System.out.println("Starting training " + (System.currentTimeMillis() - start_time) / 1000);
