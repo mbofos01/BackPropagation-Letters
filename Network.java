@@ -369,11 +369,11 @@ public class Network {
 	public static void printArguments() {
 		System.out.println("            +---------------------------+");
 		System.out.println("            |  Input layer:  " + (INPUT_LAYER - 1) + "         |");
-		System.out.println("            |  Hidden layer: " + (SECOND_LAYER - 1) + "          |");
+		System.out.println("            |  Hidden layer: " + (SECOND_LAYER - 1) + "         |");
 		if (THIRD_LAYER != 0)
-			System.out.println("            |  2nd Hidden layer: " + (THIRD_LAYER - 1) + "      |");
+			System.out.println("            |  2nd Hidden layer: " + (THIRD_LAYER - 1) + "     |");
 		System.out.println("            |  Output layer: " + OUTPUT_LAYER + "         |");
-		System.out.println("            |  Max epochs: " + EPOCH_LIMIT + "         |");
+		System.out.println("            |  Max epochs: " + EPOCH_LIMIT + "          |");
 		System.out.println("            |  Learning rate: " + R + "       |");
 		System.out.println("            |  Momenmtum: " + M + "           |");
 		System.out.println("            |  Train file: " + train + "    |");
