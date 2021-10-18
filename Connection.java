@@ -97,12 +97,4 @@ public class Connection {
 		return weightHistory;
 	}
 
-	public static void main(String[] args) {
-		Connection con = new Connection(new Neuron(), new Neuron(), 2);
-		con.details();
-		System.out.println(con.getLastWeight());
-		con.changeWeight(5);
-		System.out.println(con.getLastWeight());
-	}
-
 }

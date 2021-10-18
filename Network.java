@@ -390,7 +390,7 @@ public class Network {
 		String filename = "parameters.txt";
 		if (args.length >= 1)
 			filename = args[0];
-		dataCleaner.runMe("normalized.txt");
+		Tools.createTrainAndTestSets("normalized.txt");
 		ArrayList<String> list = Tools.getParameters(filename);
 		handleParameters(list);
 
