@@ -4,6 +4,6 @@ numInputNeurons 16
 numOutputNeurons 26
 learningRate 0.9
 momentum 0.1
-maxIterations 400
+maxIterations 200
 trainFile train.txt
 testFile test.txt
