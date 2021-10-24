@@ -5,7 +5,8 @@ Author: Michail - Panagiotis Bofos AO082689
 Note: if you have Python and pyplot installed the program will create its own error/epoch and success/epoch plots, anyhow the requested files will still be created.
 
 *** Files train.txt and test.txt are recreated each time we run the application ***
-*** a example set is given in the Results directory ***
+
+*** an example set is given in the Results directory ***
 
 For mre information your can read the Report.pdf which explains decision such as the train & test set creation and the parameters used.
 
