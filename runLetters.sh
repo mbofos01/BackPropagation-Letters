@@ -5,7 +5,7 @@ if [ "$#" -ne 1 ] && [ "$#" -ne 2 ]; then
   exit 1
 fi
 
-echo Running xor gate simulation using $1 . . .
+echo Running handwritten letter recognition using $1 . . .
 javac *.java 
 java Network $1
 echo Done 

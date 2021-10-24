@@ -7,6 +7,7 @@ Note: if you have Python and pyplot installed the program will create its own er
 *** Files train.txt and test.txt are recreated each time we run the application ***
 
 For mre information your can read the Report.pdf which explains decision such as the train & test set creation and the parameters used.
+
 Instructions: 
 
     Windows: 
@@ -15,3 +16,4 @@ Instructions:
 
     Unix/Linux:
             1) Run runLetters.sh parameters.txt - or - runLetters.sh parameters.txt -C [if you want to clean up the .class files created]
+            NOTE: keep in mind to give runLetters.sh script running rights "chmod +x runLetters.sh"

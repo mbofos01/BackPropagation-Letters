@@ -407,7 +407,7 @@ public class Network {
 		do {
 			double TRAIN_ERROR = 0.0, TRAIN_SUCCESS = 0.0;
 			System.out.println("Epoch: " + epochs);
-			System.out.println("Starting training " + (System.currentTimeMillis() - start_time) / 1000);
+			System.out.println("Starting training " + (System.currentTimeMillis() - start_time) / 1000 + " seconds");
 			for (int i = 0; i < train_size; i++) {
 				ArrayList<Double> opj = new ArrayList<>();
 				ArrayList<Double> tpj = new ArrayList<>();
@@ -437,7 +437,7 @@ public class Network {
 			TRAIN_SUCCESS = TRAIN_SUCCESS / (train_size * 1.0);
 			TRAIN_ERROR = TRAIN_ERROR / train_size;
 			double TEST_ERROR = 0.0, TEST_SUCCESS = 0.0;
-			System.out.println("Starting testing " + (System.currentTimeMillis() - start_time) / 1000);
+			System.out.println("Starting testing " + (System.currentTimeMillis() - start_time) / 1000 + " seconds");
 			for (int i = 0; i < test_size; i++) {
 				ArrayList<Double> opj = new ArrayList<>();
 				ArrayList<Double> tpj = new ArrayList<>();
