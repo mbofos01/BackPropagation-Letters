@@ -6,6 +6,8 @@ Note: if you have Python and pyplot installed the program will create its own er
 
 *** Files train.txt and test.txt are recreated each time we run the application ***
 
+*** an example set is given in the Results directory ***
+
 For mre information your can read the Report.pdf which explains decision such as the train & test set creation and the parameters used.
 
 Instructions: 
