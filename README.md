@@ -2,7 +2,7 @@ Project: Hand written letter recognition using backpropagation algorithm
 
 Author: Michail - Panagiotis Bofos 
 
-Note: if you have Python and pyplot installed the program will create its own error/epoch and success/epoch plots, anyhow the requested files will still be created.
+Note: if you have Python and PyPlot installed the program will create its own error/epoch and success/epoch plots, anyhow the requested files will still be created.
 
 *** Files train.txt and test.txt are recreated each time we run the application ***
 
